@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+  notebook:
+    image: mecab-base-notebook
+    container_name: "aizen_analytics"
+    build: .
+    # ポートの設定("ホスト：コンテナ")
+    ports:
+    # エラーの元、確認
+      - "1212:8888"
+    volumes:
+      - ./work:/home/jovyan/work

@@ -1,0 +1,8 @@
+gensim
+numpy
+sklearn
+janome
+pandas
+beautifulsoup4
+firebase_admin
+wordcloud

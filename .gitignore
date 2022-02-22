@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# DATA
+/server/python/aizen/data/
+/generate_model/work/data
