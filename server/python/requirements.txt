@@ -3,3 +3,5 @@ numpy
 sklearn
 janome
 firebase_admin
+fastapi
+uvicorn

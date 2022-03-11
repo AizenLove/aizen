@@ -26,6 +26,7 @@ initialize_app(cred, {
 db.reference()に所望のデータのパスを入れるとjsonが返ってくる
 AVのデータは /resource/video 以下にidを付与して格納
 """
+
 base_pass = "/resource/video/"
 
 print("db connect done.")

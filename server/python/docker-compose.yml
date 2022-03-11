@@ -4,7 +4,7 @@ services:
     container_name: aizen
     build: .
     ports:
-      - "127.0.0.1:80:8080"
+      - "80:8080"
     volumes:
       - ./aizen:/aizen
     tty: true
