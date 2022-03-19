@@ -31,8 +31,14 @@ base_pass = "/resource/video/"
 
 print("db connect done.")
 
+# 検索
 @app.get("/query-beta/")
 def read_item(user_req: str, iter_num: int = 40):
     rec_id = aizen.predict_sim_content(user_req, iter_num)
 
     return db.reference(base_pass + rec_id).get()
+
+# インスタンスをとりあえず叩き起こす時に使う
+@app.get("/_warm_up/")
+def wake_up():
+    return {"alive" : True}
