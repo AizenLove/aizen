@@ -1,0 +1,24 @@
+@startuml
+actor User as user
+boundary FBhost as host
+boundary API as api 
+database FBdb as db
+Entity Fanza as outer
+
+user -> host :page request
+user <-- host :response
+user -> api :boot request
+user <-- api :response
+
+||| 
+  
+user --> api : query request
+note bottom
+  After this,
+  user's input will start
+End note
+api --> db : data query
+api <-- db : data response
+user <-- api : query response
+user --> outer : request for xxx
+@enduml
