@@ -1,5 +1,6 @@
 # webフレームワークのインポート
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 # モデルを扱うための自作ツール
 from recommend_video import Aizen
@@ -10,9 +11,27 @@ from firebase_admin import credentials # 認証
 from firebase_admin import db          # realtime database(以下db)との接続
 
 app = FastAPI()
+
+"""
+いずれはここに購入したドメインを記す。
+当面はヤリマンセキュリティ
+origins = [
+]
+"""
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], #　ヤリマンセキュリティ
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 aizen = Aizen("./data/doc2vec.model", "./data/video_id_list.txt")
 print("model import done.")
 
+# 認証情報の読み込み
 cred = credentials.Certificate('./data/aizen-f96b7-43b1fadd870e.json')
 
 initialize_app(cred, {
