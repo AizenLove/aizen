@@ -21,7 +21,7 @@
     // 型 👮
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true
+    // "exactOptionalPropertyTypes": true  // aspida 生成コードが非対応
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

@@ -36,9 +36,9 @@ module.exports = {
       "error",
       {
         "ts-expect-error": "allow-with-description",
-        "ts-ignore": false,
-        "ts-nocheck": false,
-        "ts-check": true,
+        "ts-ignore": true,
+        "ts-nocheck": "allow-with-description",
+        "ts-check": false,
         minimumDescriptionLength: 1,
       },
     ],
