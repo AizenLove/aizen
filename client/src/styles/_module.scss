@@ -1,0 +1,10 @@
+.m-context {
+  isolation: isolate;
+}
+
+@for $i from 1 through 5 {
+  .m-z#{$i} {
+    z-index: $i;
+    position: relative;
+  }
+}

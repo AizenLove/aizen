@@ -1,0 +1,31 @@
+@use "~/styles/global" as g;
+
+.pageContainer {
+  padding: g.$header-height 0 0 0;
+}
+
+.header {
+  height: g.$header-height;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.main {
+  min-height: calc(100vh - (#{g.$header-height} + #{g.$footer-height}));
+  min-height: calc(100dvh - (#{g.$header-height} + #{g.$footer-height}));
+
+  * {
+    scroll-margin-top: g.$header-height;
+  }
+}
+
+.footer {
+  height: g.$footer-height;
+}
+
+.header,
+.main,
+.footer {
+  width: 100%;
+}

@@ -14,7 +14,7 @@
   // stylelint
   "stylelint.configBasedir": "./client",
   // prettier
-  "prettier.configPath": "./.prettierrc.js",
+  "prettier.configPath": "./client/.prettierrc.js",
   // format on save
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
