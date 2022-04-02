@@ -2,7 +2,7 @@ import { useState } from "react";
 import logo from "./logo.svg";
 import "./styles/App.scss";
 
-function App() {
+const App: React.VFC = () => {
   const [count, setCount] = useState(0);
 
   return (
