@@ -132,5 +132,8 @@ dmypy.json
 /server/python/aizen/data/
 /generate_model/work/data
 
+# VSCode
+.vscode/settings.json
+
 # Personal
 .history

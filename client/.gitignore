@@ -25,3 +25,7 @@ dist-ssr
 
 # yarn v3
 .yarn
+
+# linter
+.eslintcache
+.stylelintcache

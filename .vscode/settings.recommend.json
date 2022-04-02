@@ -1,0 +1,27 @@
+// まるっとコピーすればそこそこちゃんと動くよ
+{
+  // typescript
+  "typescript.tsdk": "client/node_modules/typescript/lib",
+  // eslint
+  "eslint.workingDirectories": ["./client"],
+  "eslint.validate": [
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.options": {
+    "overrideConfigFile": "./.eslintrc.cjs"
+  },
+  // stylelint
+  "stylelint.configBasedir": "./client",
+  // prettier
+  "prettier.configPath": "./.prettierrc.js",
+  // format on save
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "[typescript, typescriptreact, javascript, javascriptreact, json, jsonc]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
