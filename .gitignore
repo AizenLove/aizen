@@ -131,3 +131,6 @@ dmypy.json
 # DATA
 /server/python/aizen/data/
 /generate_model/work/data
+
+# Personal
+.history
