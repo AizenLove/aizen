@@ -17,3 +17,7 @@ export type ValidationError = {
   msg: string
   type: string
 }
+
+export type WarmUpResponse = {
+  alive: boolean
+}

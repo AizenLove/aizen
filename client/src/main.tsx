@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { RecoilRoot } from "recoil";
 import { Layout } from "~/components/layout";
+import { ServerCheck } from "./components/server-check";
 import { location, routes } from "./utils/router";
 
 import "./styles/index.scss";
@@ -11,9 +12,11 @@ ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
       <Router routes={routes} location={location}>
-        <Layout>
-          <Outlet />
-        </Layout>
+        <ServerCheck>
+          <Layout>
+            <Outlet />
+          </Layout>
+        </ServerCheck>
       </Router>
     </RecoilRoot>
   </React.StrictMode>,

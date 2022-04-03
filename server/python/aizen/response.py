@@ -9,3 +9,7 @@ class QueryBetaResponse(BaseModel):
     describe: str
     image: str
     tags: List[str]
+
+
+class WarmUpResponse(BaseModel):
+    alive: bool

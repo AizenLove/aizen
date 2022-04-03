@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # モデルを扱うための自作ツール
 from recommend_video import Aizen
-from response import QueryBetaResponse
+from response import QueryBetaResponse, WarmUpResponse
 
 # firebaseにアクセスする関連
 from firebase_admin import initialize_app
@@ -60,6 +60,6 @@ def read_item(user_req: str, iter_num: int = 40) -> QueryBetaResponse:
 
 
 # インスタンスをとりあえず叩き起こす時に使う
-@app.get("/_warm_up/")
-def wake_up():
-    return {"alive": True}
+@app.get("/warm_up/", response_model=WarmUpResponse)
+def wake_up() -> WarmUpResponse:
+    return WarmUpResponse(**{"alive": True})
