@@ -24,7 +24,8 @@ dist-ssr
 *.sw?
 
 # yarn v3
-.yarn
+.yarn/*
+!.yarn/releases/*
 
 # linter
 .eslintcache
