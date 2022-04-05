@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-location";
 import classNames from "classnames";
 import styles from "./layout.module.scss";
 
@@ -14,6 +15,16 @@ export const Layout: React.VFC<Props> = ({ children }) => {
       {/* そんな複雑じゃないしとりあえず直接で良いっしょ */}
       <header className={classNames(styles.header, "m-z1")}>
         <h1>aizen</h1>
+        <nav>
+          <ul className={styles.headerNavList}>
+            <li>
+              <Link to="/">HOME</Link>
+            </li>
+            <li>
+              <Link to="/home_v2">HOME V2</Link>
+            </li>
+          </ul>
+        </nav>
       </header>
       <main className={styles.main}>
         <div>{children}</div>

@@ -10,6 +10,25 @@
   top: 0;
   left: 0;
   background: g.$header-bg-color;
+  display: flex;
+  width: 100%;
+  padding: 0 5px;
+
+  &,
+  nav {
+    width: 100%;
+  }
+}
+
+.headerNavList {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+
+  li:not(:first-child) {
+    margin: 0 0 0 10px;
+  }
 }
 
 .main {

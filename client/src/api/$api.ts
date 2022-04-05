@@ -1,7 +1,7 @@
-import type { AspidaClient, BasicHeaders } from 'aspida'
 import { dataToURLString } from 'aspida'
 import type { Methods as Methods0 } from './query-beta'
 import type { Methods as Methods1 } from './warm_up'
+import type { AspidaClient, BasicHeaders } from 'aspida'
 
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const prefix = (baseURL === undefined ? '' : baseURL).replace(/\/$/, '')
