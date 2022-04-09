@@ -54,7 +54,10 @@ module.exports = {
     ],
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     "@typescript-eslint/method-signature-style": ["error", "property"],
-    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+    ],
     // common
     "no-console": "warn",
     "import/order": [

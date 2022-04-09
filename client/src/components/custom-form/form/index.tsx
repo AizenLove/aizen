@@ -6,6 +6,7 @@ import type { UseFormProps, FieldValues } from "react-hook-form";
 type PublicFormProps = React.PropsWithChildren<{
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- 抽象度が高すぎて無理ポ
   onSubmit: (data: any) => void;
+  className?: string,
 }>;
 
 type FormProps = React.PropsWithChildren<{
@@ -17,6 +18,7 @@ type FormProps = React.PropsWithChildren<{
 }>;
 
 export const Form: React.VFC<PublicFormProps> = ({
+  className,
   defaultValues,
   children,
   onSubmit,
@@ -25,7 +27,7 @@ export const Form: React.VFC<PublicFormProps> = ({
   const { handleSubmit } = methods;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={className}>
       {React.Children.map(children, (child) => {
         return child.props.name
           ? React.createElement(child.type, {
