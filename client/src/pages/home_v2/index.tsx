@@ -13,7 +13,7 @@ import { detectInAppBrowser, parseIosVersion } from "~/utils/user-agent";
 import styles from "./home.module.scss";
 
 type HomePageV2ContentProps = {
-  searchText: string;
+  searchText: string | undefined;
   itemNum?: number;
 };
 
@@ -21,11 +21,13 @@ const HomePageV2Content: React.VFC<HomePageV2ContentProps> = ({
   searchText,
   itemNum,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<QueryBetaResponse | undefined>(undefined);
   const { isAlive } = useRecoilValue(serverState);
 
   useEffect(() => {
     if (searchText !== undefined && searchText !== "") {
+      setIsLoading(true);
       apiClient.query_beta
         .$get({
           query: {
@@ -34,6 +36,7 @@ const HomePageV2Content: React.VFC<HomePageV2ContentProps> = ({
           },
         })
         .then((response) => {
+          setIsLoading(false);
           setData(response);
         })
         .catch((error) => {
@@ -44,19 +47,20 @@ const HomePageV2Content: React.VFC<HomePageV2ContentProps> = ({
     }
   }, [searchText, isAlive]);
 
-  if (!isAlive) {
+  if (!isAlive || searchText === "" || searchText === undefined) {
+    return <div>♡ なにがでるかな ♡</div>;
+  }
+
+  if (isLoading) {
     return <Loading />;
   }
 
   if (data === undefined) {
-    return <Loading />;
+    // レコメンドなので見つからんことはないが、一応
+    return <div>見つかりませんでした :cry:</div>;
   }
 
-  return (
-    <>
-      <SearchResult data={data} />
-    </>
-  );
+  return <SearchResult data={data} />;
 };
 
 type FormValues = {
@@ -86,14 +90,9 @@ export const HomeV2: React.VFC = () => {
   return (
     <div className={styles.homePage}>
       {/* とりあえず検索なしで雑に表示するよ */}
-      {typeof searchText !== "undefined" && searchText !== "" ? (
-        <HomePageV2Content searchText={searchText} itemNum={40} />
-      ) : (
-        <div>♡ なにがでるかな ♡</div>
-      )}
+      <HomePageV2Content searchText={searchText} itemNum={40} />
 
       <div
-        id="xxx"
         className={classNames(
           styles.formContainer,
           isActive ? styles.isActive : null,
