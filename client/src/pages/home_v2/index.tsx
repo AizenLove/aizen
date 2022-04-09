@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useForm, Controller, useWatch } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import type { QueryBetaResponse } from "~/api/@types";
+import { Form } from "~/components/custom-form/form";
+import { Input } from "~/components/custom-form/input";
 import { Loading } from "~/components/loading";
 import { SearchResult } from "~/components/search-result";
 import { serverState } from "~/store/server";
@@ -17,13 +18,11 @@ const HomePageV2Content: React.VFC<HomePageV2ContentProps> = ({
   searchText,
   itemNum,
 }) => {
-  const [currentText, setCurrentText] = useState("");
   const [data, setData] = useState<QueryBetaResponse | undefined>(undefined);
   const { isAlive } = useRecoilValue(serverState);
 
   useEffect(() => {
-    if (searchText !== undefined && searchText !== "") {
-      setCurrentText(searchText);
+    if ( searchText !== undefined && searchText !== "") {
       apiClient.query_beta
         .$get({
           query: {
@@ -32,9 +31,6 @@ const HomePageV2Content: React.VFC<HomePageV2ContentProps> = ({
           },
         })
         .then((response) => {
-          // 次のリクエスト投げてたらそっちを待つよ
-          if (currentText !== searchText) return;
-
           setData(response);
         })
         .catch((error) => {
@@ -60,34 +56,34 @@ const HomePageV2Content: React.VFC<HomePageV2ContentProps> = ({
   );
 };
 
+type FormValues = {
+  userReq: string;
+};
+
+
 export const HomeV2: React.VFC = () => {
-  const { control } = useForm<{
-    searchText: string;
-  }>();
-  const searchText = useWatch({
-    control,
-    name: "searchText",
-    defaultValue: "",
-  });
+
+  const [searchText, setSearchText] = useState<string | undefined>(undefined);
+  const onSubmit = ({ userReq }: FormValues) => {
+    if (typeof userReq !== "undefined") {
+      setSearchText(userReq);
+    }
+  };
 
   return (
     <div className={styles.homePage}>
-      <Controller
-        render={({ field: { onChange, value } }) => (
-          <input
-            className={styles.searchWordInput}
-            onChange={onChange}
-            value={value}
-          />
-        )}
-        name="searchText"
-        control={control}
-        defaultValue=""
-      />
+      <Form onSubmit={onSubmit}>
+        <Input
+          className={styles.searchWordInput}
+          type="text"
+          placeholder="検索するワードを入力してね〜"
+          name="userReq"
+        />
+      </Form>
 
       {/* とりあえず検索なしで雑に表示するよ */}
       {typeof searchText !== "undefined" && searchText !== "" ? (
-        <HomePageV2Content searchText={searchText} itemNum={1} />
+        <HomePageV2Content searchText={searchText} itemNum={40} />
       ) : (
         <div>♡ なにがでるかな ♡</div>
       )}
