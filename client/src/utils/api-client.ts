@@ -4,8 +4,7 @@ import type { AxiosRequestConfig } from "axios";
 import api from "~/api/$api";
 
 const devConfig: AxiosRequestConfig = {
-  baseURL: "http://localhost:8080",
-  withCredentials: true,
+  baseURL: "http://192.168.1.6:80",
 };
 
 const prodConfig: AxiosRequestConfig = {

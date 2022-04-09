@@ -8,4 +8,7 @@ export default defineConfig({
   alias: {
     "~": resolve(".", "src"),
   },
+  server: {
+    host: "0.0.0.0",
+  },
 });
