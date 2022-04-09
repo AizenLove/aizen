@@ -1,27 +1,63 @@
-import { range } from "rambda";
-import { useState } from "react";
+import classNames from "classnames";
+import { useEffect, useMemo, useState } from "react";
 import { useRecoilValue } from "recoil";
+import type { QueryBetaResponse } from "~/api/@types";
 import { Form } from "~/components/custom-form/form";
-import { Input, Select } from "~/components/custom-form/input";
+import { Input } from "~/components/custom-form/input";
 import { Loading } from "~/components/loading";
 import { SearchResult } from "~/components/search-result";
-import { useQueryBeta } from "~/hooks/use-query-beta";
 import { serverState } from "~/store/server";
+import { apiClient } from "~/utils/api-client";
+import type { SemVersion } from "~/utils/user-agent";
+import { detectInAppBrowser, parseIosVersion } from "~/utils/user-agent";
 import styles from "./home.module.scss";
 
 type HomePageContentProps = {
-  userReq: string;
+  searchText: string | undefined;
   itemNum?: number;
 };
 
 const HomePageContent: React.VFC<HomePageContentProps> = ({
-  userReq,
+  searchText,
   itemNum,
 }) => {
-  const { data, isValidating } = useQueryBeta(userReq, itemNum);
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState<QueryBetaResponse | undefined>(undefined);
+  const { isAlive } = useRecoilValue(serverState);
 
-  if (data === undefined || isValidating) {
+  useEffect(() => {
+    if (searchText !== undefined && searchText !== "") {
+      setIsLoading(true);
+      apiClient.query_beta
+        .$get({
+          query: {
+            user_req: searchText,
+            iter_num: itemNum,
+          },
+        })
+        .then((response) => {
+          setIsLoading(false);
+          setData(response);
+        })
+        .catch((error) => {
+          // TODO: ダイアログかなんか出す
+          // eslint-disable-next-line no-console
+          console.log(error);
+        });
+    }
+  }, [searchText, isAlive]);
+
+  if (!isAlive || searchText === "" || searchText === undefined) {
+    return <div>♡ なにがでるかな ♡</div>;
+  }
+
+  if (isLoading) {
     return <Loading />;
+  }
+
+  if (data === undefined) {
+    // レコメンドなので見つからんことはないが、一応
+    return <div>見つかりませんでした :cry:</div>;
   }
 
   return <SearchResult data={data} />;
@@ -29,50 +65,59 @@ const HomePageContent: React.VFC<HomePageContentProps> = ({
 
 type FormValues = {
   userReq: string;
-  itemNum: number;
 };
+
+const isSpecialSafari = ({ major, minor, patch }: SemVersion): boolean =>
+  major === 15 && (minor <= 3 || (minor === 4 && patch === 0));
 
 export const Home: React.VFC = () => {
   const [searchText, setSearchText] = useState<string | undefined>(undefined);
-  const [itemNum, setItemNum] = useState<number>(1);
-  const { isAlive } = useRecoilValue(serverState);
+  const [isActive, setIsActive] = useState(false);
 
-  const onSubmit = ({ userReq, itemNum }: FormValues) => {
+  const onSubmit = ({ userReq }: FormValues) => {
     if (typeof userReq !== "undefined") {
       setSearchText(userReq);
-      setItemNum(itemNum);
     }
   };
 
+  const [iosVersion, browserKind] = useMemo(() => {
+    return [
+      parseIosVersion(window.navigator.userAgent),
+      detectInAppBrowser(window.navigator.userAgent),
+    ] as const;
+  }, []);
+
   return (
     <div className={styles.homePage}>
-      <Form onSubmit={onSubmit}>
-        <Select
-          className={styles.itemNumInput}
-          name="itemNum"
-          options={range(1, 10).map((i) => String(i))}
-        />
-        <Input
-          className={styles.searchWordInput}
-          type="text"
-          placeholder="検索するワードを入力してね〜"
-          name="userReq"
-        />
-
-        <Input
-          className={styles.submitButton}
-          type="submit"
-          value="検索する"
-          disabled={!isAlive}
-        />
-      </Form>
-
       {/* とりあえず検索なしで雑に表示するよ */}
-      {typeof searchText !== "undefined" ? (
-        <HomePageContent userReq={searchText} itemNum={itemNum} />
-      ) : (
-        <div>♡ なにがでるかな ♡</div>
-      )}
+      <HomePageContent searchText={searchText} itemNum={40} />
+
+      <div
+        className={classNames(
+          styles.formContainer,
+          isActive ? styles.isActive : null,
+          browserKind === "maybe_safari_ios" &&
+            iosVersion !== null &&
+            isSpecialSafari(iosVersion)
+            ? styles.isSpecialSafari
+            : null
+        )}
+      >
+        <Form onSubmit={onSubmit} className={styles.form}>
+          <Input
+            className={styles.searchWordInput}
+            type="text"
+            placeholder="検索するワードを入力してね〜"
+            name="userReq"
+            onFocus={() => {
+              setIsActive(!isActive);
+            }}
+            onBlur={() => {
+              setIsActive(false);
+            }}
+          />
+        </Form>
+      </div>
     </div>
   );
 };
