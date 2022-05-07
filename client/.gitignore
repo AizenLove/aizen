@@ -30,3 +30,6 @@ dist-ssr
 # linter
 .eslintcache
 .stylelintcache
+
+# 一旦コミットしなくていいや
+coverage/

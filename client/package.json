@@ -21,7 +21,9 @@
     "npm-watch": "npm-watch",
     "prebuild": "yarn typecheck",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest"
   },
   "watch": {
     "apigen": {
@@ -55,6 +57,7 @@
     "@typescript-eslint/parser": "^5.17.0",
     "@vitejs/plugin-react": "^1.0.7",
     "autoprefixer": "^10.4.4",
+    "c8": "^7.11.2",
     "cssnano": "^5.1.7",
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
@@ -79,7 +82,8 @@
     "stylelint-scss": "^4.2.0",
     "type-predicates-generator": "^0.3.2",
     "typescript": "^4.5.4",
-    "vite": "^2.9.0"
+    "vite": "^2.9.0",
+    "vitest": "^0.11.0"
   },
   "packageManager": "yarn@3.0.0"
 }
