@@ -1,0 +1,17 @@
+// size
+$header-height: 50px;
+$footer-height: 100px;
+
+// domain color; color palette から適当に拾ってきたのであとで直してケロ
+$service-color-strong: #ec407a;
+$service-color-basic: #ce93d8;
+$service-color-weak: #efebe9;
+
+// base color
+$color-white: #fafafa;
+$color-black: #303030;
+
+// topic color
+$header-bg-color: $service-color-basic;
+$main-bg-color: $service-color-weak;
+$footer-bg-color: $service-color-basic;
