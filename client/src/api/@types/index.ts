@@ -13,7 +13,7 @@ export type QueryBetaResponse = {
 }
 
 export type ValidationError = {
-  loc: string[]
+  loc: (Partial<string & number>)[]
   msg: string
   type: string
 }
