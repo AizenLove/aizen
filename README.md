@@ -13,8 +13,8 @@
 [この辺のファイル](https://skys-project.slack.com/archives/C0370SEMY2D/p1648908030470519) おいて
 
 ```bash
-$ cd server
-$ IS_DEV docker-compose up --build -d
+$ cd server/python
+$ IS_DEV=true docker-compose up --build -d
 ```
 
 で起動するやで
