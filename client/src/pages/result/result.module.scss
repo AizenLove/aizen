@@ -1,0 +1,36 @@
+.homePage {
+  padding: 10px 5px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  padding: 0 5px;
+}
+
+.itemNumInput {
+  width: 100px;
+}
+
+.searchWordInput {
+  width: 100%;
+}
+
+.formContainer {
+  background: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+
+  &.isActive.isSpecialSafari {
+    // ios 15.0 <-> 15.4.0
+    bottom: 20px;
+  }
+}

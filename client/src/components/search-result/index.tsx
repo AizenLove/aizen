@@ -10,8 +10,13 @@ export const SearchResult: React.VFC<SearchResultProps> = ({ data }) => {
   const cid = `nygw0006`;
   return (
     <div className={styles.resultContainer}>
+      <div>あなたの求めるAVは・・・</div>
       <h2>{data.title}</h2>
       <img src={data.image} />
+      <div className="descriptionContainer">
+        <div>{data.describe}</div>
+        <a href={data.base_url}>FANZA で確認する</a>
+      </div>
       <video
         style={{
           width: "90%",
@@ -23,8 +28,6 @@ export const SearchResult: React.VFC<SearchResultProps> = ({ data }) => {
         autoPlay={false}
         src={`https://cc3001.dmm.co.jp/litevideo/freepv/n/nyg/${cid}/${cid}_mhb_w.mp4`}
       ></video>
-      <a href={data.base_url}>FANZA で確認する</a>
-      <div>{data.describe}</div>
     </div>
   );
 };
