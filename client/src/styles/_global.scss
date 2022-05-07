@@ -1,5 +1,4 @@
 // size
-$header-height: 50px;
 $footer-height: 100px;
 
 // domain color; color palette から適当に拾ってきたのであとで直してケロ
@@ -12,6 +11,6 @@ $color-white: #fafafa;
 $color-black: #303030;
 
 // topic color
-$header-bg-color: $service-color-basic;
 $main-bg-color: $service-color-weak;
 $footer-bg-color: $service-color-basic;
+$footer-bg-color-reversed: $color-white;

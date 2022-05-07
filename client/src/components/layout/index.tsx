@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-location";
 import classNames from "classnames";
 import styles from "./layout.module.scss";
 
@@ -12,16 +11,12 @@ export const Layout: React.VFC<Props> = ({ children }) => {
       id={layoutId}
       className={classNames(styles.pageContainer, "m-context")}
     >
-      {/* そんな複雑じゃないしとりあえず直接で良いっしょ */}
-      <header className={classNames(styles.header, "m-z1")}>
-        <h1>
-          <Link to="/">aizen</Link>
-        </h1>
-      </header>
       <main className={styles.main}>
         <div>{children}</div>
       </main>
-      <footer className={styles.footer}>フッターだよ</footer>
+      <footer className={styles.footer}>
+        <small>© Nihon-Uni.admiral-Honda</small>
+      </footer>
       <div className="m-z2">{/* Portal 経由でモーダルを置く */}</div>
     </div>
   );
