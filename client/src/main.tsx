@@ -2,7 +2,6 @@ import { Router, Outlet } from "@tanstack/react-location";
 import React from "react";
 import ReactDOM from "react-dom";
 import { RecoilRoot } from "recoil";
-import { Layout } from "~/components/layout";
 import { ServerCheck } from "./components/server-check";
 import { location, routes } from "./utils/router";
 
@@ -13,9 +12,7 @@ ReactDOM.render(
     <RecoilRoot>
       <Router routes={routes} location={location}>
         <ServerCheck>
-          <Layout>
-            <Outlet />
-          </Layout>
+          <Outlet />
         </ServerCheck>
       </Router>
     </RecoilRoot>

@@ -3,6 +3,7 @@
 
 .list {
   list-style: none;
+  padding: 0;
 }
 
 .listItem {
@@ -10,14 +11,14 @@
   $-min-loop-time: 6;
 
   color: g.$service-color-basic;
-  font-size: 200px;
+  font-weight: bold;
   animation-name: side-loop;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-fill-mode: both;
 
-  $-min-size: 5px;
-  $-max-size: 20px;
+  $-min-size: 10px;
+  $-max-size: 30px;
 
   @for $i from 1 to 30 {
     &:nth-child(#{$i}) {

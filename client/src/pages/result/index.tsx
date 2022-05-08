@@ -11,6 +11,7 @@ import { isResultPageSearchParams } from '~/utils/predicates';
 import type { UnEmptyString} from '~/value-object/un-empty-string';
 import { unEmptyStringFactory } from '~/value-object/un-empty-string';
 import styles from "./result.module.scss";
+import { Layout } from "~/components/layout";
 
 type ResultPageContentProps = {
   searchText: UnEmptyString;
@@ -91,8 +92,11 @@ export const ResultPage: React.VFC = () => {
   }
 
   return (
+    <Layout>
     <div className={styles.resultPage}>
       {isAlive ? <ResultPageContent searchText={searchQuery} /> : <Loading />}
     </div>
+    </Layout>
+
   );
 };
