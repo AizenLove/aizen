@@ -1,9 +1,9 @@
-import { useNavigate } from "@tanstack/react-location";
 import classNames from "classnames";
 import { useState } from "react";
-import { AttractTextBackground } from "~/components/attract-text-background";
+import { AttractTextBackground } from "~/components/attract-text-background/index.stories";
 import { Form } from "~/components/custom-form/form";
 import { Input } from "~/components/custom-form/input";
+import { useNavigate } from "~/hooks/use-navigate";
 import type { ResultPageGenerics } from "~/types/routes";
 import styles from "./home.module.scss";
 
@@ -13,19 +13,18 @@ type FormValues = {
 
 export const Home: React.VFC = () => {
   const [isActive, setIsActive] = useState(false);
-
-  const navigate = useNavigate<ResultPageGenerics>();
+  const navigate = useNavigate();
 
   const onSubmit = ({ userReq }: FormValues) => {
-    if (typeof userReq !== "undefined") {
-      navigate({
-        to: "/result",
-        search: (old) => ({
-          ...old,
+    if (typeof userReq !== "undefined" && userReq !== "") {
+      navigate<ResultPageGenerics["Search"]>({
+        to: "result",
+        params: {
           search: userReq,
-        }),
+        },
       });
     }
+    // バリデーションこけたらエラーメッセージ出してあげたいね
   };
 
   return (
@@ -41,7 +40,9 @@ export const Home: React.VFC = () => {
           )}
         >
           <h3 className={styles.aizen}>aizen</h3>
-          <p className={styles.question}>Q あなたの求めるエッチなシチュエーションは?</p>
+          <p className={styles.question}>
+            Q あなたの求めるエッチなシチュエーションは?
+          </p>
           <Form onSubmit={onSubmit} className={styles.form}>
             <Input
               className={styles.searchWordInput}

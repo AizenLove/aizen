@@ -1,9 +1,10 @@
-import { ReactLocation } from "@tanstack/react-location";
+import { createBrowserHistory, ReactLocation } from "@tanstack/react-location";
 import type { Route } from "@tanstack/react-location";
 import { Home } from "~/pages/home";
 import { ResultPage } from "~/pages/result";
 
-export const location = new ReactLocation();
+const history = createBrowserHistory();
+export const location = new ReactLocation({ history });
 
 export const routes: Route[] = [
   {
@@ -11,7 +12,7 @@ export const routes: Route[] = [
     element: <Home />,
   },
   {
-    path: "/result",
+    path: "result",
     element: <ResultPage />,
-  }
+  },
 ];

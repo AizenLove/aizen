@@ -5,10 +5,12 @@ import api from "~/api/$api";
 
 const devConfig: AxiosRequestConfig = {
   baseURL: "http://192.168.1.6:80",
+  timeout: 2000,
 };
 
 const prodConfig: AxiosRequestConfig = {
   baseURL: "",
+  timeout: 5000,
 };
 
 const baseApiClient = api(

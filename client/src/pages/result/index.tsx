@@ -1,17 +1,19 @@
-import { useNavigate, useSearch, Link } from '@tanstack/react-location'
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import type { QueryBetaResponse } from "~/api/@types";
+import { Layout } from "~/components/layout";
+import { Link } from "~/components/link/index.stories";
 import { Loading } from "~/components/loading";
 import { SearchResult } from "~/components/search-result";
+import { useNavigate } from "~/hooks/use-navigate";
+import { useParams } from "~/hooks/use-params";
 import { serverState } from "~/store/server";
-import type { ResultPageGenerics } from '~/types/routes'
+import { unEmptyStringFactory } from "~/types/branded/un-empty-string";
+import type { UnEmptyString } from "~/types/branded/un-empty-string";
+import type { ResultPageGenerics } from "~/types/routes";
 import { apiClient } from "~/utils/api-client";
-import { isResultPageSearchParams } from '~/utils/predicates';
-import type { UnEmptyString} from '~/value-object/un-empty-string';
-import { unEmptyStringFactory } from '~/value-object/un-empty-string';
+import { isResultPageSearchParams } from "~/utils/predicates";
 import styles from "./result.module.scss";
-import { Layout } from "~/components/layout";
 
 type ResultPageContentProps = {
   searchText: UnEmptyString;
@@ -22,6 +24,7 @@ const ResultPageContent: React.VFC<ResultPageContentProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<QueryBetaResponse | undefined>(undefined);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,10 +39,11 @@ const ResultPageContent: React.VFC<ResultPageContentProps> = ({
         setIsLoading(false);
         setData(response);
       })
-      .catch((error) => {
+      .catch(() => {
         // TODO: ダイアログかなんか出す
-        // eslint-disable-next-line no-console
-        console.error(error);
+        navigate({
+          to: "/",
+        });
       });
   }, [searchText]);
 
@@ -61,42 +65,44 @@ const ResultPageContent: React.VFC<ResultPageContentProps> = ({
 };
 
 export const ResultPage: React.VFC = () => {
-  const navigate = useNavigate()
-  const query = useSearch<ResultPageGenerics>()
+  const { queryParams } = useParams<
+    Record<string, never>,
+    ResultPageGenerics["Search"]
+  >();
   const { isAlive } = useRecoilValue(serverState);
+  const navigate = useNavigate();
 
-  if (!isResultPageSearchParams(query)) {
+  if (!isResultPageSearchParams(queryParams)) {
     navigate({
-      to: '/',
-      replace: true
-    })
+      to: "/",
+      replace: false,
+    });
     // メッセージ出すと親切かもね
+    // FIXME: 画面遷移走るタイミングで一瞬だけこのページコンポーネント+クエリが別ページ用になってここ呼ばれて落ちてるっぽい
     return null;
   }
 
   const searchQuery = (() => {
     try {
-      return unEmptyStringFactory.build(query.search)
+      return unEmptyStringFactory.build(queryParams.search);
     } catch (err) {
-      return undefined
+      return undefined;
     }
-  })()
+  })();
 
   if (searchQuery === undefined) {
     navigate({
-      to: '/',
-      replace: true
-    })
+      to: "/",
+    });
     // メッセージ出すと親切かもね
     return null;
   }
 
   return (
     <Layout>
-    <div className={styles.resultPage}>
-      {isAlive ? <ResultPageContent searchText={searchQuery} /> : <Loading />}
-    </div>
+      <div className={styles.resultPage}>
+        {isAlive ? <ResultPageContent searchText={searchQuery} /> : <Loading />}
+      </div>
     </Layout>
-
   );
 };

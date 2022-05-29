@@ -9,13 +9,13 @@ import "./styles/index.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <RecoilRoot>
-      <Router routes={routes} location={location}>
+    <Router routes={routes} location={location}>
+      <RecoilRoot>
         <ServerCheck>
           <Outlet />
         </ServerCheck>
-      </Router>
-    </RecoilRoot>
+      </RecoilRoot>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );

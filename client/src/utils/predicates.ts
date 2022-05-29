@@ -7,6 +7,7 @@ const hasNotUnlistedProperties = (listedKeys: string[]) =>
   (value: Record<string, unknown>): boolean =>
     Object.keys(value).every(key => listedKeys.includes(key))
 
+
 /**
  * Check if a variable is of type {@link ResultPageGenerics} and narrow it down to that type if the check passes.
  * This function is automatically generated using [type-predicates-generator](https://www.npmjs.com/package/type-predicates-generator).
