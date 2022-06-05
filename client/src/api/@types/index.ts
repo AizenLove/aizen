@@ -4,12 +4,12 @@ export type HTTPValidationError = {
 }
 
 export type QueryBetaResponse = {
-  id: string
-  title: string
   base_url: string
   describe: string
+  id: string
   image: string
   tags: string[]
+  title: string
 }
 
 export type ValidationError = {

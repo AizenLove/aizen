@@ -4,7 +4,7 @@ import type { AxiosRequestConfig } from "axios";
 import api from "~/api/$api";
 
 const devConfig: AxiosRequestConfig = {
-  baseURL: "http://192.168.1.6:80",
+  baseURL: "https://recommend.aizen.love",
   timeout: 2000,
 };
 

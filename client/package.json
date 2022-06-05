@@ -5,7 +5,7 @@
   "scripts": {
     "dev:vite": "vite",
     "dev:npm-watch": "npm run npm-watch",
-    "dev:type-predicates-generator": "type-predicates-generator -f 'src/types/**/*.ts' -o 'src/utils/predicates.ts' -a -w --default-array-check-option first -c --whitelist",
+    "dev:type-predicates-generator": "type-predicates-generator -f 'src/types/routes.ts' -o 'src/utils/predicates.ts' -a -w --default-array-check-option first -c --whitelist",
     "dev": "run-p 'dev:*'",
     "predev": "yarn apigen",
     "apigen": "./bin/generate_api.sh",
