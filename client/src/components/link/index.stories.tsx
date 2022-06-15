@@ -1,17 +1,14 @@
-import { Link as LinkReactLocation } from "@tanstack/react-location";
-import type { StoryObj } from "@storybook/react";
-import type { PropsWithChildren } from "react";
+import type { LinkProps } from ".";
+import { defineStoryMeta, defineStoryObj } from "~/utils/define-story";
+import { Link } from ".";
 
-export type LinkProps = PropsWithChildren<{
-  to: string;
-}>;
-
-export const Link: React.VFC<LinkProps> = ({ to, children }) => {
-  return <LinkReactLocation to={to}>{children}</LinkReactLocation>;
-};
-
-export default { component: Link };
-export const Default: StoryObj<LinkProps> = {
-  args: {},
+export default defineStoryMeta<LinkProps>({
+  component: Link,
+});
+export const Default = defineStoryObj<LinkProps>({
+  args: {
+    to: "リンクテキスト",
+    children: "Link Text",
+  },
   render: (args) => <Link {...args} />,
-};
+});

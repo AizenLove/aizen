@@ -1,6 +1,8 @@
 import styles from "./loading.module.scss";
 
-export const Loading: React.VFC = () => {
+export type LoadingProps = Record<string, never>;
+
+export const Loading: React.VFC<LoadingProps> = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.atomSpinner}>

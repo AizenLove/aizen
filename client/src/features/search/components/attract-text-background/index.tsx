@@ -1,6 +1,5 @@
 import { range } from "rambda";
 import { useMemo } from "react";
-import type { StoryObj } from "@storybook/react";
 import { getRandomAttractText } from "~/services/attract-text";
 import styles from "./attract-text-background.module.scss";
 
@@ -25,10 +24,4 @@ export const AttractTextBackground: React.VFC<
       ))}
     </ul>
   );
-};
-
-export default { component: AttractTextBackground };
-export const Default: StoryObj<AttractTextBackgroundProps> = {
-  args: {},
-  render: (args) => <AttractTextBackground {...args} />,
 };

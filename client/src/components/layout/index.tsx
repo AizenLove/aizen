@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import styles from "./layout.module.scss";
 
-type Props = React.PropsWithChildren<Record<string, unknown>>;
+export type LayoutProps = React.PropsWithChildren<Record<string, unknown>>;
 
 export const layoutId = "layout-root";
 
-export const Layout: React.VFC<Props> = ({ children }) => {
+export const Layout: React.VFC<LayoutProps> = ({ children }) => {
   return (
     <div
       id={layoutId}
