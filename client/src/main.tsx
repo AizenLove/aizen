@@ -3,8 +3,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { RecoilRoot } from "recoil";
 import { ServerCheck } from "./components/server-check";
+import { MessageProvider } from "./features/message/components/message-provider";
 import { location, routes } from "./utils/router";
-
 import "./styles/index.scss";
 
 ReactDOM.render(
@@ -12,7 +12,9 @@ ReactDOM.render(
     <Router routes={routes} location={location}>
       <RecoilRoot>
         <ServerCheck>
-          <Outlet />
+          <MessageProvider>
+            <Outlet />
+          </MessageProvider>
         </ServerCheck>
       </RecoilRoot>
     </Router>

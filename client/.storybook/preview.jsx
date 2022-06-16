@@ -5,6 +5,7 @@ import {
   ReactLocation,
   Router,
 } from "@tanstack/react-location";
+import { RecoilRoot } from "recoil";
 
 window.jest = jest;
 
@@ -35,4 +36,8 @@ export const InMemoryRouter = ({ children }) => {
   );
 };
 
-addDecorator((story) => <InMemoryRouter>{story()}</InMemoryRouter>);
+addDecorator((story) => (
+  <InMemoryRouter>
+    <RecoilRoot>{story()}</RecoilRoot>
+  </InMemoryRouter>
+));

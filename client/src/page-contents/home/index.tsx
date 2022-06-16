@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Form } from "~/components/custom-form/form";
 import { Input } from "~/components/custom-form/input";
 import { Layout } from "~/components/layout";
+import { useAddMessage } from "~/features/message/hooks/use-add-message";
 import { AttractTextBackground } from "~/features/search/components/attract-text-background";
 import { useNavigate } from "~/hooks/use-navigate";
 import type { ResultPageGenerics } from "~/types/routes";
@@ -17,17 +18,19 @@ export type HomePageContentProps = Record<string, never>;
 export const HomePageContent: React.VFC<HomePageContentProps> = () => {
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
+  const addMessage = useAddMessage();
 
   const onSubmit = ({ userReq }: FormValues) => {
-    if (typeof userReq !== "undefined" && userReq !== "") {
-      navigate<ResultPageGenerics["Search"]>({
-        to: "result",
-        params: {
-          search: userReq,
-        },
-      });
+    if (typeof userReq === "undefined" || userReq === "") {
+      addMessage("error", "検索する文字を入力してね♥", 2000);
     }
-    // バリデーションこけたらエラーメッセージ出してあげたいね
+
+    navigate<ResultPageGenerics["Search"]>({
+      to: "result",
+      params: {
+        search: userReq,
+      },
+    });
   };
 
   return (

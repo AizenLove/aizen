@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { RiExternalLinkLine } from "react-icons/ri";
 import { Button } from "~/components/button";
 import type { FanzaVideo } from "~/features/search/services";
 import { useNavigate } from "~/hooks/use-navigate";
@@ -22,6 +23,7 @@ export const SearchResult: React.VFC<SearchResultProps> = ({ fanzaVideo }) => {
       <div className={styles.description}>{fanzaVideo.description}</div>
       <div className={styles.moveLinkWrapper}>
         <a className={styles.moveFanzaLink} href={fanzaVideo.detailUrl}>
+          <RiExternalLinkLine />
           FANZA で確認する
         </a>
       </div>

@@ -17,7 +17,9 @@ export const Layout: React.VFC<LayoutProps> = ({ children }) => {
       <footer className={styles.footer}>
         <small>© Nihon-Uni.admiral-Honda</small>
       </footer>
-      <div className="m-z2">{/* Portal 経由でモーダルを置く */}</div>
+      <div id={layoutId} className="m-z2">
+        {/* Portal 経由でモーダルを置く */}
+      </div>
     </div>
   );
 };
