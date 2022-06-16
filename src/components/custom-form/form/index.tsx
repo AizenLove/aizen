@@ -6,7 +6,7 @@ import type { UseFormProps, FieldValues } from "react-hook-form";
 type PublicFormProps = React.PropsWithChildren<{
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- 抽象度が高すぎて無理ポ
   onSubmit: (data: any) => void;
-  className?: string,
+  className?: string;
 }>;
 
 type FormProps = React.PropsWithChildren<{

@@ -18,10 +18,7 @@
     "paths": {
       "~/*": ["src/*"]
     },
-    "types": [
-      "node",
-      "vite/client"
-    ],
+    "types": ["node", "vite/client"],
     // 型 👮
     "strict": true,
     "noUncheckedIndexedAccess": true

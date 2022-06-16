@@ -4,10 +4,7 @@
   "typescript.tsdk": "client/node_modules/typescript/lib",
   // eslint
   "eslint.workingDirectories": ["./client"],
-  "eslint.validate": [
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["typescript", "typescriptreact"],
   "eslint.options": {
     "overrideConfigFile": "./.eslintrc.cjs"
   },

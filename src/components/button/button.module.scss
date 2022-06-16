@@ -16,5 +16,5 @@
   font-weight: bold;
   box-shadow: 0 4px 5px color.adjust(g.$color-black, $lightness: 65%);
 
-  @include button-color('white', g.$color-white, g.$service-color-basic);
+  @include button-color("white", g.$color-white, g.$service-color-basic);
 }
