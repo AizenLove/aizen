@@ -1,0 +1,25 @@
+@use "~/styles/global" as g;
+
+.pageContainer {
+  padding: 0;
+}
+
+.main {
+  min-height: calc(100vh - #{g.$footer-height});
+  min-height: calc(100dvh - #{g.$footer-height});
+  background: g.$main-bg-color;
+}
+
+.footer {
+  height: g.$footer-height;
+  background: g.$footer-bg-color;
+  color: g.$footer-bg-color-reversed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main,
+.footer {
+  width: 100%;
+}

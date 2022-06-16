@@ -1,0 +1,43 @@
+@use "sass:math";
+@use "~/styles/global" as g;
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.listItem {
+  $-max-loop-time: 12;
+  $-min-loop-time: 6;
+
+  color: g.$service-color-basic;
+  font-weight: bold;
+  animation-name: side-loop;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+
+  $-min-size: 10px;
+  $-max-size: 30px;
+
+  @for $i from 1 to 30 {
+    &:nth-child(#{$i}) {
+      $-loop-time: $-min-loop-time + math.random($-max-loop-time);
+
+      animation-duration: 1s * $-loop-time;
+      animation-delay: -1s * $-loop-time * math.div(math.random(100), 100);
+      font-size: $-min-size +
+        ($-max-size - $-min-size) *
+        math.div(math.random(100), 100);
+    }
+  }
+}
+
+@keyframes side-loop {
+  0% {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
