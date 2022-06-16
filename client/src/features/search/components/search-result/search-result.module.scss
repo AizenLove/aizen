@@ -4,34 +4,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 10px 0;
 }
 
 .preHeading {
   color: g.$color-white;
   background: g.$service-color-basic;
   display: flex;
-  padding: 25px 0;
+  height: 60px;
   width: 95%;
   justify-content: center;
+  align-items: center;
   border-radius: 30px;
   font-size: 20px;
   position: relative;
 
-  &::after {
-    $-size: 15px;
+  $-triangle-size: 15px;
 
+  margin: 0 0 $-triangle-size 0;
+
+  &::after {
     content: "";
     position: absolute;
     left: 40px;
-    bottom: -1 * 2 * $-size;
-    border: $-size solid transparent;
-    border-top: $-size solid g.$service-color-basic;
+    bottom: -1 * 2 * $-triangle-size;
+    border: $-triangle-size solid transparent;
+    border-top: $-triangle-size solid g.$service-color-basic;
   }
 }
 
 .heading {
-  font-weight: normal;
   position: relative;
+  font-size: 19px;
   width: 95%;
 
   $-margin: 10px;
@@ -59,7 +63,9 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
-  margin: 10px 0;
+  margin: 10px 8px;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .moveLinkWrapper {
@@ -68,9 +74,13 @@
   width: 100%;
 }
 
+.moveFanzaLink:not(:root) {
+  color: g.$color-link;
+}
+
 .buttonWrapper {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 30px 0 0;
+  margin: 30px 0;
 }
