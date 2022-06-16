@@ -1,0 +1,20 @@
+@use "sass:color";
+@use "~/styles/global" as g;
+
+@mixin button-color($-theme, $-color, $-color-reversed) {
+  &.#{$-theme}Theme {
+    background: $-color;
+    color: $-color-reversed;
+    border: solid 1px $-color-reversed;
+    box-shadow: 0 4px 5px color.adjust(g.$color-black, $lightness: 65%);
+  }
+}
+
+.button {
+  padding: 10px 40px;
+  border-radius: 20px;
+  font-weight: bold;
+  box-shadow: 0 4px 5px color.adjust(g.$color-black, $lightness: 65%);
+
+  @include button-color('white', g.$color-white, g.$service-color-basic);
+}

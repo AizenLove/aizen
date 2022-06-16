@@ -1,5 +1,4 @@
 import type { SearchResultPageContentProps } from ".";
-import type { Merge } from "type-fest";
 import { unEmptyStringFactory } from "~/types/branded/un-empty-string";
 import { defineStoryMeta, defineStoryObj } from "~/utils/define-story";
 import { loading, loaded } from "~/utils/loadable-state";
@@ -9,17 +8,16 @@ export default defineStoryMeta({
   component: SearchResultPageContent,
 });
 
-type Args = Merge<
-  SearchResultPageContentProps,
-  {
-    searchedData: "loading" | "loaded";
-  }
->;
+type ArgTypes = {
+  searchedData: "loading" | "loaded";
+  title: string;
+};
 
-export const Default = defineStoryObj<Args>({
+export const Default = defineStoryObj<SearchResultPageContentProps, ArgTypes>({
   args: {
     isAlive: true,
     searchText: unEmptyStringFactory.build("検索ワード"),
+    title: "タイトル",
   },
   argTypes: {
     searchText: {
@@ -32,6 +30,9 @@ export const Default = defineStoryObj<Args>({
         type: "inline-radio",
       },
       defaultValue: "loading",
+    },
+    title: {
+      control: { type: "text" },
     },
   },
   render: ({ searchText, searchedData, isAlive }) => {

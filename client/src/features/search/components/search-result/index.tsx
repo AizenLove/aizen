@@ -1,43 +1,51 @@
-import type { QueryBetaResponse } from "~/api/@types";
-import { Link } from "~/components/link";
-import { Loading } from "~/components/loading";
-import type { LoadableState } from "~/utils/loadable-state";
+import { useCallback } from "react";
+import { Button } from "~/components/button";
+import type { FanzaVideo } from "~/features/search/services";
+import { useNavigate } from "~/hooks/use-navigate";
 import styles from "./search-result.module.scss";
 
 export type SearchResultProps = {
-  data: LoadableState<QueryBetaResponse>;
+  fanzaVideo: FanzaVideo;
 };
 
-export const SearchResult: React.VFC<SearchResultProps> = ({ data }) => {
-  // 一時的ににハードコーディングするよ
-  const cid = "nygw0006";
+export const SearchResult: React.VFC<SearchResultProps> = ({ fanzaVideo }) => {
+  const navigate = useNavigate();
+  const onClick = useCallback(() => {
+    navigate({ to: "/" });
+  }, []);
+
   return (
     <div className={styles.resultContainer}>
-      {data.isLoading ? (
-        <Loading />
+      <div className={styles.preHeading}>あなたの求めるAVは・・・</div>
+      <h2 className={styles.heading}>{fanzaVideo.title}</h2>
+      <img className={styles.image} src={fanzaVideo.imageUrl} />
+      <div className={styles.description}>{fanzaVideo.description}</div>
+      <div className={styles.moveLinkWrapper}>
+        <a className={styles.moveFanzaLink} href={fanzaVideo.detailUrl}>
+          FANZA で確認する
+        </a>
+      </div>
+
+      {fanzaVideo.videoUrl !== undefined ? (
+        <video
+          style={{
+            width: "100%",
+          }}
+          controls={true}
+          data-binding="play"
+          data-service="digital"
+          data-mode="detail"
+          autoPlay={false}
+          src={fanzaVideo.videoUrl}
+        ></video>
       ) : (
-        <>
-          <div>あなたの求めるAVは・・・</div>
-          <h2>{data.value.title}</h2>
-          <img src={data.value.image} />
-          <div className="descriptionContainer">
-            <div>{data.value.describe}</div>
-            <a href={data.value.base_url}>FANZA で確認する</a>
-          </div>
-          <video
-            style={{
-              width: "90%",
-            }}
-            controls={true}
-            data-binding="play"
-            data-service="digital"
-            data-mode="detail"
-            autoPlay={false}
-            src={`https://cc3001.dmm.co.jp/litevideo/freepv/n/nyg/${cid}/${cid}_mhb_w.mp4`}
-          ></video>
-          <Link to="/">TOPへ</Link>
-        </>
+        <div>サンプル動画が提供されていません。</div>
       )}
+      <div className={styles.buttonWrapper}>
+        <Button theme="white" onClick={onClick}>
+          TOPへ
+        </Button>
+      </div>
     </div>
   );
 };
