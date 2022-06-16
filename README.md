@@ -1,38 +1,47 @@
-# aizen
+# aizen (client)
 
-## 開発環境
+## 開発環境セットアップ
 
-### URL
+- node v16.15.1
+- yarn v3
 
-- http://localhost:3000 :アプリが見れる
-- http://localhost:80 :APIサーバー
-- http://localhost:80/redoc :APIドキュメント
-
-### server
-
-[この辺のファイル](https://skys-project.slack.com/archives/C0370SEMY2D/p1648908030470519) おいて
+が必要なので準備してネ
 
 ```bash
-$ cd server/python
-$ IS_DEV=true docker-compose up --build -d
+$ yarn install
 ```
 
-で起動するやで
-
-### client
+## 開発サーバーを建てる
 
 ```bash
-$ cd client
-$ yarn install
 $ yarn dev
 ```
 
-で起動するやで
-push とかコミット前に
+で開発サーバーが建つよ
+URL: http://localhost:3000
+
+※ サーバーサイドは別リポジトリで管理している、現状では開発環境でも本番のAPIを叩いてるのでサーバーサイドのサーバーを建てる必要はなし
+
+## コンポーネント管理
 
 ```bash
-$ yarn typecheck
-$ yarn fix
+$ yarn storybook
 ```
 
-すれば変なコード書いてないかチェックしてくれるやで
+で storybook が見れるよ、コンポーネント追加したら story もセットで置いてあると嬉しい
+
+## linter にかける
+
+```bash
+$ yarn typecheck # 型チェック
+$ yarn lint      # eslint, stylelint, prettier
+$ yarn fix       # 自動修正かけたいなら fix
+```
+
+## テスト
+
+コンポーネントのテストは書いてないけどロジックのテストは一部書いてる
+
+```bash
+$ yarn test
+```
