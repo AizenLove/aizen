@@ -1,0 +1,17 @@
+// size
+$footer-height: 100px;
+
+// domain color; color palette から適当に拾ってきたのであとで直してケロ
+$service-color-strong: #ec407a;
+$service-color-basic: #ce93d8;
+$service-color-weak: #efebe9;
+
+// base color
+$color-white: #fff;
+$color-black: #303030;
+
+// topic color
+$main-bg-color: $color-white;
+$footer-bg-color: $service-color-basic;
+$footer-bg-color-reversed: $color-white;
+$color-link: blue;
