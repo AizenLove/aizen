@@ -7,6 +7,5 @@ export const convertFanzaVideo = (res: QueryBetaResponse): FanzaVideo => ({
   title: res.title,
   imageUrl: res.image,
   tags: res.tags,
-  // @ts-expect-error -- API 治るまでの暫定措置
-  videoUrl: res.sampleMovieURL,
+  videoUrl: res.sampleMovieURL?.size_476_306,
 });
