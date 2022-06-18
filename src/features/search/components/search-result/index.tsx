@@ -29,17 +29,7 @@ export const SearchResult: React.VFC<SearchResultProps> = ({ fanzaVideo }) => {
       </div>
 
       {fanzaVideo.videoUrl !== undefined ? (
-        <video
-          style={{
-            width: "100%",
-          }}
-          controls={true}
-          data-binding="play"
-          data-service="digital"
-          data-mode="detail"
-          autoPlay={false}
-          src={fanzaVideo.videoUrl}
-        ></video>
+        <iframe src={fanzaVideo.videoUrl} width="100%"></iframe>
       ) : (
         <div>サンプル動画が提供されていません。</div>
       )}
