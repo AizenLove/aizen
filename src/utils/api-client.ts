@@ -9,7 +9,7 @@ const devConfig: AxiosRequestConfig = {
 };
 
 const prodConfig: AxiosRequestConfig = {
-  baseURL: "",
+  baseURL: "https://recommend.aizen.love",
   timeout: 5000,
 };
 
