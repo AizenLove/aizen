@@ -13,7 +13,7 @@ runs:
 
     - name: Get Yarn Cache directory path
       id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+      run: echo "::set-output name=dir::$(pwd)/.yarn/cache"
       shell: bash
 
     - name: cache yarn global cache directory
