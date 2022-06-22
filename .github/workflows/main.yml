@@ -28,7 +28,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-20.04
-    # if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     needs: main
     steps:
       - uses: actions/checkout@v2
@@ -41,4 +41,4 @@ jobs:
           yarn build
 
       - name: deploy to application
-        run: echo "NotImplemented"
+        run: echo "[FIXME] ここでデプロイ処理を実行する"
