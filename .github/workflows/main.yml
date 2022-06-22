@@ -18,7 +18,10 @@ jobs:
       - name: Setup Node and application
         uses: ./.github/actions/setup
 
-      - name: run lint
+      - name: type check
+        run: yarn typecheck
+
+      - name: linters check
         run: |
           yarn lint
 
@@ -26,19 +29,14 @@ jobs:
         run: |
           yarn test
 
+      - name: check if successfully build application
+        run: |
+          yarn build
+
   deploy:
     runs-on: ubuntu-20.04
     if: github.ref == 'refs/heads/main'
     needs: main
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Node and application
-        uses: ./.github/actions/setup
-
-      - name: build application
-        run: |
-          yarn build
-
       - name: deploy to application
         run: echo "[FIXME] ここでデプロイ処理を実行する"
