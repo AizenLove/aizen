@@ -1,0 +1,13 @@
+.messages {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  list-style: none;
+  padding: 0 10px;
+
+  li:not(:first-child) {
+    margin: 10px 0 0;
+  }
+}

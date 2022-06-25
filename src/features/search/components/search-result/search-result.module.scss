@@ -1,0 +1,86 @@
+@use "~/styles/global" as g;
+
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.preHeading {
+  color: g.$color-white;
+  background: g.$service-color-basic;
+  display: flex;
+  height: 60px;
+  width: 95%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  font-size: 20px;
+  position: relative;
+
+  $-triangle-size: 15px;
+
+  margin: 0 0 $-triangle-size 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 40px;
+    bottom: -1 * 2 * $-triangle-size;
+    border: $-triangle-size solid transparent;
+    border-top: $-triangle-size solid g.$service-color-basic;
+  }
+}
+
+.heading {
+  position: relative;
+  font-size: 19px;
+  width: 95%;
+
+  $-margin: 10px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 95%;
+    left: 0;
+    bottom: -1 * $-margin;
+    height: 5px;
+    background: g.$service-color-basic;
+    border-radius: 10px;
+  }
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.description {
+  overflow: hidden;
+  // stylelint-disable-next-line value-no-vendor-prefix
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  margin: 10px 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.moveLinkWrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.moveFanzaLink:not(:root) {
+  color: g.$color-link;
+}
+
+.buttonWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
