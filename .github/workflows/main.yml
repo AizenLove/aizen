@@ -1,0 +1,55 @@
+name: main
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  main:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node and application
+        uses: ./.github/actions/setup
+
+      - name: type check
+        run: yarn typecheck
+
+      - name: linters check
+        run: |
+          yarn lint
+
+      - name: run test
+        run: |
+          yarn test
+
+      - name: check if successfully build application
+        run: |
+          yarn build
+
+  deploy:
+    runs-on: ubuntu-20.04
+    if: github.ref == 'refs/heads/main'
+    needs: main
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node and application
+        uses: ./.github/actions/setup
+
+      - name: build
+        run: yarn build
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_HOSTING_INTEGRATION_GITHUB }}"
+          projectId: FIXME
+        env:
+          FIREBASE_CLI_PREVIEWS: hostingchannels
