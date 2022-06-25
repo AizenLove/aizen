@@ -82,6 +82,7 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-storybook": "^0.5.11",
+    "firebase-tools": "^11.1.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.2",
     "modern-css-reset": "^1.4.0",
