@@ -29,5 +29,8 @@ dist-ssr
 .eslintcache
 .stylelintcache
 
+# firebase
+.firebase
+
 # 一旦コミットしなくていいや
 coverage/
