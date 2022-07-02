@@ -51,5 +51,6 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_AIZEN_F96B7 }}"
           projectId: aizen-f96b7
+          channelId: live
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
