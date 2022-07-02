@@ -30,7 +30,7 @@
     "deploy": "run-s 'deploy:*'",
     "postinstall:husky": "husky install",
     "postinstall:git": "git config --local --add merge.ff false && git config --local --add pull.ff only",
-    "postinstall": "run-p 'prepare:*'"
+    "postinstall": "run-p 'postinstall:*'"
   },
   "config": {
     "commitizen": {
