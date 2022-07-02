@@ -28,9 +28,9 @@
     "deploy:build": "yarn build",
     "deploy:fb": "firebase deploy --only hosting",
     "deploy": "run-s 'deploy:*'",
-    "prepare:husky": "husky install",
-    "prepare:git": "git config --local --add merge.ff false && git config --local --add pull.ff only",
-    "prepare": "run-p 'prepare:*'"
+    "postinstall:husky": "husky install",
+    "postinstall:git": "git config --local --add merge.ff false && git config --local --add pull.ff only",
+    "postinstall": "run-p 'prepare:*'"
   },
   "config": {
     "commitizen": {
